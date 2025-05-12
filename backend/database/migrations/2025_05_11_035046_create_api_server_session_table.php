@@ -27,6 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('api_server_session');
+        Schema::table('APIServer_session', function (Blueprint $table) {  // 대소문자 맞춤!
+            $table->dropForeign(['exhibition_id']);
+        });
+
+        Schema::dropIfExists('APIServer_session');
     }
 };
