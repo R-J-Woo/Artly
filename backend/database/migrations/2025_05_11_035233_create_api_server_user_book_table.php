@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('APIServer_user_book', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('APIServer_user')->onDelete('cascade');
-            $table->foreignId('book_id')->constrained('APIServer_book')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('book_id');
             $table->string('user_book_payment_method');
             $table->enum('user_book_status', ['paid', 'canceled'])->default('paid');
             $table->dateTime('create_dttm')->nullable();
             $table->dateTime('update_dttm')->nullable();
+            
+            $table->foreign('user_id')->references('id')->on('APIServer_user')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('APIServer_book')->onDelete('cascade');
         });
     }
 

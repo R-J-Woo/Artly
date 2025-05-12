@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('APIServer_session', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exhibition_id')->constrained('APIServer_exhibition')->onDelete('cascade');
-            $table->datetime('session_datetime');
+            $table->unsignedBigInteger('exhibition_id');
+            $table->dateTime('session_datetime');
             $table->integer('session_total_capacity');
             $table->integer('session_reservation_capacity');
             $table->dateTime('create_dttm')->nullable();
             $table->dateTime('update_dttm')->nullable();
+
+            $table->foreign('exhibition_id')->references('id')->on('APIServer_exhibition')->onDelete('cascade');
         });
     }
 
@@ -27,10 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('APIServer_session', function (Blueprint $table) {  // 대소문자 맞춤!
-            $table->dropForeign(['exhibition_id']);
-        });
-
-        Schema::dropIfExists('APIServer_session');
+        Schema::dropIfExists('api_server_session');
     }
 };

@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('APIServer_book_page', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained('APIServer_book')->onDelete('cascade');
-            $table->foreignId('art_id')->constrained('APIServer_art')->onDelete('cascade');
+            $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('art_id');
             $table->integer('book_page_sequence');
             $table->text('book_page_description')->nullable();
             $table->dateTime('create_dttm')->nullable();
             $table->dateTime('update_dttm')->nullable();
+            
+            $table->foreign('book_id')->references('id')->on('APIServer_book')->onDelete('cascade');
+            $table->foreign('art_id')->references('id')->on('APIServer_art')->onDelete('cascade');
         });
     }
 

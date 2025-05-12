@@ -31,7 +31,7 @@ class AnnouncementSeeder extends Seeder
                 'announcement_site_url' => $faker->url,
                 'announcement_attachment_url' => $faker->url,
                 'content' => $faker->paragraph,
-                'announcement_create_dttm' => now(),
+                'create_dttm' => now(),
                 'update_dttm' => now()
             ]);
         }

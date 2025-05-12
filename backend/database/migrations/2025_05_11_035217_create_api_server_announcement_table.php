@@ -13,18 +13,21 @@ return new class extends Migration
     {
         Schema::create('APIServer_announcement', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('APIServer_user')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
             $table->string('announcement_title');
             $table->string('announcement_poster')->nullable();
             $table->datetime('announcement_start_datetime');
             $table->datetime('announcement_end_datetime');
             $table->string('announcement_organizer')->nullable();
+            $table->string('announcement_contact')->nullable();
             $table->string('announcement_support_detail')->nullable();
             $table->string('announcement_site_url')->nullable();
             $table->string('announcement_attachment_url')->nullable();
             $table->text('content')->nullable();
             $table->dateTime('create_dttm')->nullable();
             $table->dateTime('update_dttm')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('APIServer_user')->onDelete('cascade');
         });
     }
 

@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('book_title');
             $table->string('book_poster')->nullable();
-            $table->foreignId('exhibition_id')->constrained('APIServer_exhibition')->onDelete('cascade');
+            $table->unsignedBigInteger('exhibition_id');
             $table->dateTime('create_dttm')->nullable();
             $table->dateTime('update_dttm')->nullable();
+                    
+            $table->foreign('exhibition_id')->references('id')->on('APIServer_exhibition')->onDelete('cascade'); 
         });
     }
 

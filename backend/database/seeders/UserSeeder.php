@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'user_keyword' => $faker->word,
                 'admin_flag' => 0,
                 'gallery_id' => $faker->randomElement($galleries),
-                'last_login_time' => $now,
+                'last_login_time' => now(),
                 'reg_time' => now(),
                 'update_dttm' => now(),
             ]);

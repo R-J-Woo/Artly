@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('APIServer_exhibition_participation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exhibition_id')->constrained('APIServer_exhibition')->onDelete('cascade');
-            $table->foreignId('artist_id')->constrained('APIServer_artist')->onDelete('cascade');
+            $table->unsignedBigInteger('exhibition_id');
+            $table->unsignedBigInteger('artist_id');
             $table->string('role');
             $table->dateTime('create_dttm')->nullable();
             $table->dateTime('update_dttm')->nullable();
+            
+            $table->foreign('exhibition_id')->references('id')->on('APIServer_exhibition')->onDelete('cascade');
+            $table->foreign('artist_id')->references('id')->on('APIServer_artist')->onDelete('cascade');
         });
     }
 
